@@ -37,8 +37,15 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Publish Docker Image
+      - name: Build, Tag and Publish Docker Image
         run: |
           ./mvnw spring-boot:build-image -DskipTests
-          echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
-          docker push $DOCKER_IMAGE_NAME
+
+          echo "Tagging image..."
+          docker tag catalog-service:0.0.1-SNAPSHOT $DOCKER_IMAGE_NAME:latest
+
+          echo "Available images:"
+          docker images
+
+          echo "Pushing the image $DOCKER_IMAGE_NAME:latest to Docker Hub..."
+          docker push $DOCKER_IMAGE_NAME:latest
