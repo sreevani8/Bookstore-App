@@ -43,8 +43,11 @@ jobs:
 
       - name: Build and Publish Docker Image
         run: |
-          ./mvnw spring-boot:build-image -DskipTests
+          ./mvnw spring-boot:build-image \
+            -DskipTests \
+            -Dspring-boot.build-image.imageName=${DOCKER_IMAGE_NAME}:latest
 
-          docker tag catalog-service:0.0.1-SNAPSHOT ${DOCKER_IMAGE_NAME}:latest
+          docker images
 
           docker push ${DOCKER_IMAGE_NAME}:latest
+      
