@@ -40,12 +40,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build Docker image
+      - name: Build and Publish Docker image
         run: |
-          ./mvnw spring-boot:build-image \
-            -DskipTests \
-            -Dspring-boot.build-image.imageName=${DOCKER_IMAGE_NAME}
-      
+          ./mvnw spring-boot:build-image -DskipTests \
+            echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
+          docker push $DOCKER_IMAGE_NAME
 
-      - name: Push Docker image
-        run: docker push ${DOCKER_IMAGE_NAME}
