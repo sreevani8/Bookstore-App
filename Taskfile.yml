@@ -1,0 +1,45 @@
+version: '3'
+
+vars:
+  DC_DIR: "deployment/docker-compose"
+  INFRA_DC_FILE: "{{.DC_DIR}}/infra.yml"
+  APPS_DC_FILE: "{{.DC_DIR}}/apps.yml"
+
+tasks:
+  default:
+    cmds:
+      - task: test
+
+  test:
+    deps: [format]
+    cmds:
+      - mvn clean verify
+
+  format:
+    cmds:
+      - mvn spotless:apply
+
+  build:
+    cmds:
+      - mvn -pl catalog-service spring-boot:build-image -DskipTests
+  start:
+    deps: [build]
+    cmds:
+      - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} up -d"
+
+  stop:
+    cmds:
+      - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} stop"
+      - "docker compose -f {{.INFRA_DC_FILE}} -f {{.APPS_DC_FILE}} rm -f"
+
+  restart:
+    cmds:
+      - task: stop
+      - task: sleep
+      - task: start
+
+  sleep:
+    vars:
+      DURATION: "{{default 5 .DURATION}}"
+    cmds:
+      - sleep {{.DURATION}}
