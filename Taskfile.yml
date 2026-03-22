@@ -22,6 +22,7 @@ tasks:
   build:
     cmds:
       - mvn -pl catalog-service spring-boot:build-image -DskipTests
+      - mvn -pl order-service spring-boot:build-image -DskipTests
   start:
     deps: [build]
     cmds:
