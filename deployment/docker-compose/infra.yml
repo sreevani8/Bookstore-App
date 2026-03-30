@@ -36,6 +36,7 @@ services:
       resources:
         limits:
           memory: 500m
+
   bookstore-rabbitmq:
     image: rabbitmq:3.12.11-management
     container_name: bookstore-rabbitmq
@@ -54,19 +55,3 @@ services:
       resources:
         limits:
           memory: 500m
-  keycloak:
-    image: quay.io/keycloak/keycloak:26.3.0
-    command: [ 'start-dev', '--import-realm', '--http-port=9191' ]
-    container_name: keycloak
-    hostname: keycloak
-    volumes:
-      - ./realm-config:/opt/keycloak/data/import
-    environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin1234
-    ports:
-      - "9191:9191"
-    deploy:
-      resources:
-        limits:
-          memory: 2gb

@@ -15,10 +15,12 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+
     <modules>
         <module>catalog-service</module>
         <module>order-service</module>
-        <module>notification-service</module>
+
     </modules>
     <build>
         <plugins>
