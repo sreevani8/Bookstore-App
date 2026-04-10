@@ -2,8 +2,8 @@ package com.mulit.bookstore.orders.domain;
 
 import com.mulit.bookstore.orders.clients.catalog.Product;
 import com.mulit.bookstore.orders.clients.catalog.ProductServiceClient;
-import com.mulit.bookstore.orders.domain.model.CreateOrderRequest;
-import com.mulit.bookstore.orders.domain.model.OrderItem;
+import com.mulit.bookstore.orders.domain.models.CreateOrderRequest;
+import com.mulit.bookstore.orders.domain.models.OrderItem;
 import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

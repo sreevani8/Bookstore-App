@@ -1,9 +1,9 @@
 package com.mulit.bookstore.orders.domain;
 
-import com.mulit.bookstore.orders.domain.model.CreateOrderRequest;
-import com.mulit.bookstore.orders.domain.model.OrderDTO;
-import com.mulit.bookstore.orders.domain.model.OrderItem;
-import com.mulit.bookstore.orders.domain.model.OrderStatus;
+import com.mulit.bookstore.orders.domain.models.CreateOrderRequest;
+import com.mulit.bookstore.orders.domain.models.OrderDTO;
+import com.mulit.bookstore.orders.domain.models.OrderItem;
+import com.mulit.bookstore.orders.domain.models.OrderStatus;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;

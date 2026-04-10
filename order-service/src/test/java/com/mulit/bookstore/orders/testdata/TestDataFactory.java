@@ -2,10 +2,10 @@ package com.mulit.bookstore.orders.testdata;
 
 import static org.instancio.Select.field;
 
-import com.mulit.bookstore.orders.domain.model.Address;
-import com.mulit.bookstore.orders.domain.model.CreateOrderRequest;
-import com.mulit.bookstore.orders.domain.model.Customer;
-import com.mulit.bookstore.orders.domain.model.OrderItem;
+import com.mulit.bookstore.orders.domain.models.Address;
+import com.mulit.bookstore.orders.domain.models.CreateOrderRequest;
+import com.mulit.bookstore.orders.domain.models.Customer;
+import com.mulit.bookstore.orders.domain.models.OrderItem;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;

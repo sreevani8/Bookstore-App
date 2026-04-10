@@ -1,13 +1,12 @@
-package com.mulit.bookstore.orders.domain.model;
+package com.mulit.bookstore.orders.domain.models;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public record OrderCancelledEvent(
+public record OrderCreatedEvent(
         String eventId,
         String orderNumber,
         Set<OrderItem> items,
         Customer customer,
         Address deliveryAddress,
-        String reason,
         LocalDateTime createdAt) {}

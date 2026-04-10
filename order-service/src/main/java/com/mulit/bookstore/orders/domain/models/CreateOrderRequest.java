@@ -1,4 +1,4 @@
-package com.mulit.bookstore.orders.domain.model;
+package com.mulit.bookstore.orders.domain.models;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;

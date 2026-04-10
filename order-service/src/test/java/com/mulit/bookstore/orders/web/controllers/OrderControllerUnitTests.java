@@ -1,6 +1,8 @@
 package com.mulit.bookstore.orders.web.controllers;
 
-import static com.mulit.bookstore.orders.testdata.TestDataFactory.*;
+import static com.mulit.bookstore.orders.testdata.TestDataFactory.createOrderRequestWithInvalidCustomer;
+import static com.mulit.bookstore.orders.testdata.TestDataFactory.createOrderRequestWithInvalidDeliveryAddress;
+import static com.mulit.bookstore.orders.testdata.TestDataFactory.createOrderRequestWithNoItems;
 import static org.junit.jupiter.api.Named.named;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
@@ -11,10 +13,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mulit.bookstore.orders.TestSecurityConfig;
 import com.mulit.bookstore.orders.domain.OrderService;
 import com.mulit.bookstore.orders.domain.SecurityService;
-import com.mulit.bookstore.orders.domain.model.CreateOrderRequest;
+import com.mulit.bookstore.orders.domain.models.CreateOrderRequest;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -23,13 +24,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(OrderController.class)
-@Import(TestSecurityConfig.class)
 class OrderControllerUnitTests {
     @MockBean
     private OrderService orderService;
@@ -45,14 +44,14 @@ class OrderControllerUnitTests {
 
     @BeforeEach
     void setUp() {
-        given(securityService.getLoginUserName()).willReturn("sreevani");
+        given(securityService.getLoginUserName()).willReturn("siva");
     }
 
     @ParameterizedTest(name = "[{index}]-{0}")
     @MethodSource("createOrderRequestProvider")
     @WithMockUser
     void shouldReturnBadRequestWhenOrderPayloadIsInvalid(CreateOrderRequest request) throws Exception {
-        given(orderService.createOrder(eq("sreevani"), any(CreateOrderRequest.class)))
+        given(orderService.createOrder(eq("Sreevani"), any(CreateOrderRequest.class)))
                 .willReturn(null);
 
         mockMvc.perform(post("/api/orders")

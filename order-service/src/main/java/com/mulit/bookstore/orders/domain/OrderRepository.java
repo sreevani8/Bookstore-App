@@ -1,14 +1,13 @@
 package com.mulit.bookstore.orders.domain;
 
-import com.mulit.bookstore.orders.domain.model.OrderStatus;
-import com.mulit.bookstore.orders.domain.model.OrderSummary;
+import com.mulit.bookstore.orders.domain.models.OrderStatus;
+import com.mulit.bookstore.orders.domain.models.OrderSummary;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 interface OrderRepository extends JpaRepository<OrderEntity, Long> {
-
     List<OrderEntity> findByStatus(OrderStatus status);
 
     Optional<OrderEntity> findByOrderNumber(String orderNumber);
@@ -21,7 +20,7 @@ interface OrderRepository extends JpaRepository<OrderEntity, Long> {
 
     @Query(
             """
-        select new com.mulit.bookstore.orders.domain.model.OrderSummary(o.orderNumber, o.status)
+        select new com.mulit.bookstore.orders.domain.models.OrderSummary(o.orderNumber, o.status)
         from OrderEntity o
         where o.userName = :userName
         """)

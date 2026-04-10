@@ -2,7 +2,11 @@ package com.mulit.bookstore.orders.domain;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mulit.bookstore.orders.domain.model.*;
+import com.mulit.bookstore.orders.domain.models.OrderCancelledEvent;
+import com.mulit.bookstore.orders.domain.models.OrderCreatedEvent;
+import com.mulit.bookstore.orders.domain.models.OrderDeliveredEvent;
+import com.mulit.bookstore.orders.domain.models.OrderErrorEvent;
+import com.mulit.bookstore.orders.domain.models.OrderEventType;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +89,7 @@ public class OrderEventService {
                 OrderCreatedEvent orderCreatedEvent = fromJsonPayload(event.getPayload(), OrderCreatedEvent.class);
                 orderEventPublisher.publish(orderCreatedEvent);
                 break;
-            case ORDER_DELIVERED:
+            /* case ORDER_DELIVERED:
                 OrderDeliveredEvent orderDeliveredEvent =
                         fromJsonPayload(event.getPayload(), OrderDeliveredEvent.class);
                 orderEventPublisher.publish(orderDeliveredEvent);
@@ -98,7 +102,7 @@ public class OrderEventService {
             case ORDER_PROCESSING_FAILED:
                 OrderErrorEvent orderErrorEvent = fromJsonPayload(event.getPayload(), OrderErrorEvent.class);
                 orderEventPublisher.publish(orderErrorEvent);
-                break;
+                break;*/
             default:
                 log.warn("Unsupported OrderEventType: {}", eventType);
         }

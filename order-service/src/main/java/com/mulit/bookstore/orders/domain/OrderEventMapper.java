@@ -1,6 +1,10 @@
 package com.mulit.bookstore.orders.domain;
 
-import com.mulit.bookstore.orders.domain.model.*;
+import com.mulit.bookstore.orders.domain.models.OrderCancelledEvent;
+import com.mulit.bookstore.orders.domain.models.OrderCreatedEvent;
+import com.mulit.bookstore.orders.domain.models.OrderDeliveredEvent;
+import com.mulit.bookstore.orders.domain.models.OrderErrorEvent;
+import com.mulit.bookstore.orders.domain.models.OrderItem;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;

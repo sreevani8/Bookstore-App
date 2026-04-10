@@ -1,4 +1,4 @@
-package com.mulit.bookstore.orders.domain.model;
+package com.mulit.bookstore.orders.domain.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;

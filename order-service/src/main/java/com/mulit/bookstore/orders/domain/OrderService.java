@@ -1,6 +1,6 @@
 package com.mulit.bookstore.orders.domain;
 
-import com.mulit.bookstore.orders.domain.model.*;
+import com.mulit.bookstore.orders.domain.models.*;
 import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -25,6 +25,7 @@ public class OrderService {
     }
 
     public CreateOrderResponse createOrder(String userName, CreateOrderRequest request) {
+
         orderValidator.validate(request);
         OrderEntity newOrder = OrderMapper.convertToEntity(request);
         newOrder.setUserName(userName);

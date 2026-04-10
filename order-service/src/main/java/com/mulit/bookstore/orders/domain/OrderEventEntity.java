@@ -1,6 +1,6 @@
 package com.mulit.bookstore.orders.domain;
 
-import com.mulit.bookstore.orders.domain.model.OrderEventType;
+import com.mulit.bookstore.orders.domain.models.OrderEventType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,7 +29,7 @@ class OrderEventEntity {
     @Enumerated(EnumType.STRING)
     private OrderEventType eventType;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String payload;
 
     @Column(name = "created_at", nullable = false, updatable = false)

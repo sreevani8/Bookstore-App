@@ -1,8 +1,8 @@
 package com.mulit.bookstore.orders.domain;
 
-import com.mulit.bookstore.orders.domain.model.Address;
-import com.mulit.bookstore.orders.domain.model.Customer;
-import com.mulit.bookstore.orders.domain.model.OrderStatus;
+import com.mulit.bookstore.orders.domain.models.Address;
+import com.mulit.bookstore.orders.domain.models.Customer;
+import com.mulit.bookstore.orders.domain.models.OrderStatus;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.CascadeType;
@@ -22,7 +22,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "orders")
-public class OrderEntity {
+class OrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_id_generator")
@@ -100,10 +100,6 @@ public class OrderEntity {
 
     public void setItems(Set<OrderItemEntity> items) {
         this.items = items;
-
-        if (items != null) {
-            items.forEach(item -> item.setOrder(this));
-        }
     }
 
     public Customer getCustomer() {

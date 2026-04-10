@@ -2,4 +2,4 @@ package com.mulit.bookstore.orders.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-interface OrderEventRepository extends JpaRepository<OrderEventEntity, Long> {}
+public interface OrderEventRepository extends JpaRepository<OrderEventEntity, Long> {}
