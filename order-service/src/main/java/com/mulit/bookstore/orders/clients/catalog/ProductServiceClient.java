@@ -16,8 +16,8 @@ public class ProductServiceClient {
         this.restClient = restClient;
     }
 
-   // @CircuitBreaker(name = "catalog-service")
-    //@Retry(name = "catalog-service", fallbackMethod = "getProductByCodeFallback")
+    // @CircuitBreaker(name = "catalog-service")
+    // @Retry(name = "catalog-service", fallbackMethod = "getProductByCodeFallback")
     public Optional<Product> getProductByCode(String code) {
         log.info("Fetching product for code: {}", code);
         var product =

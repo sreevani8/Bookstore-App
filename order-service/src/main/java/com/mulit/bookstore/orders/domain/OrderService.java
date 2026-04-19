@@ -1,13 +1,12 @@
 package com.mulit.bookstore.orders.domain;
 
 import com.mulit.bookstore.orders.domain.models.*;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -40,7 +39,7 @@ public class OrderService {
         return orderRepository.findByUserName(userName);
     }
 
-   public Optional<OrderDTO> findUserOrder(String userName, String orderNumber) {
+    public Optional<OrderDTO> findUserOrder(String userName, String orderNumber) {
         return orderRepository
                 .findByUserNameAndOrderNumber(userName, orderNumber)
                 .map(OrderMapper::convertToDTO);
@@ -78,6 +77,4 @@ public class OrderService {
         return DELIVERY_ALLOWED_COUNTRIES.contains(
                 order.getDeliveryAddress().country().toUpperCase());
     }
-
-
 }

@@ -11,9 +11,6 @@ class CatalogServiceClientConfig {
     @Bean
     RestClient restClient(ApplicationProperties properties) {
 
-        return RestClient.builder()
-                .baseUrl(properties.catalogServiceUrl())
-                .build();
-
+        return RestClient.builder().baseUrl(properties.catalogServiceUrl()).build();
     }
 }
