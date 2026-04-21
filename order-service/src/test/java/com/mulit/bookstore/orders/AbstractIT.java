@@ -11,18 +11,23 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(TestcontainersConfiguration.class)
 @AutoConfigureMockMvc
+// @AutoConfigureWireMock(port = 0)
+@ActiveProfiles("test")
 public abstract class AbstractIT {
 
     @LocalServerPort
-    protected int port;
+    int port;
 
     @BeforeEach
     void setup() {
         RestAssured.port = port;
+        // 🔥 Fix Java 21 RestAssured proxy bug
+        RestAssured.proxy = null;
     }
 
     protected static void mockGetProductByCode(String code, String name, BigDecimal price) {
