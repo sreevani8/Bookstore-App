@@ -1,33 +1,37 @@
 package com.mulit.bookstore.orders;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import com.github.tomakehurst.wiremock.client.WireMock;
 import io.restassured.RestAssured;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 @Import(TestcontainersConfiguration.class)
 @AutoConfigureMockMvc
-// @AutoConfigureWireMock(port = 0)
 @ActiveProfiles("test")
 public abstract class AbstractIT {
 
     @LocalServerPort
     int port;
 
+    @Autowired
+    protected MockMvc mockMvc;
+
     @BeforeEach
-    void setup() {
+    void setUp() {
         RestAssured.port = port;
-        // 🔥 Fix Java 21 RestAssured proxy bug
-        RestAssured.proxy = null;
     }
 
     protected static void mockGetProductByCode(String code, String name, BigDecimal price) {
