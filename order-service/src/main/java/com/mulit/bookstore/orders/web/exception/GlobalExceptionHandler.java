@@ -4,6 +4,9 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.mulit.bookstore.orders.domain.InvalidOrderException;
+import com.mulit.bookstore.orders.domain.OrderNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -35,7 +38,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return problemDetail;
     }
 
-    /* @ExceptionHandler(OrderNotFoundException.class)
+    @ExceptionHandler(OrderNotFoundException.class)
     ProblemDetail handleOrderNotFoundException(OrderNotFoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
         problemDetail.setTitle("Order Not Found");
@@ -55,7 +58,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         problemDetail.setProperty("error_category", "Generic");
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
-    }*/
+    }
 
     @Override
     @Nullable protected ResponseEntity<Object> handleMethodArgumentNotValid(
