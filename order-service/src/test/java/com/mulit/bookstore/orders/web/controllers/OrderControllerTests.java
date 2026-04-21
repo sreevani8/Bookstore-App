@@ -10,11 +10,9 @@ class OrderControllerTests extends AbstractIT {
 
     @Nested
     class CreateOrderTestsStub {
-       @Test
+        @Test
         void createOrder() {
-           System.out.println("Test createOrder");
-
-       }
+            System.out.println("Test createOrder");
+        }
     }
-
 }
