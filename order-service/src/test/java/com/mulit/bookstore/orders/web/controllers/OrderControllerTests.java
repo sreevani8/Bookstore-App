@@ -11,15 +11,15 @@ class OrderControllerTests extends AbstractIT {
     @Nested
     class CreateOrderTests {
 
-        @Test
+         @Test
         void createOrder() {
             System.out.println("method stubbin");
         }
-        /*@Test
-            void shouldCreateOrderSuccessfully() {
-                mockGetProductByCode("P110", "Product 1", new BigDecimal("25.50"));
-                var payload =
-                        """
+       /* @Test
+        void shouldCreateOrderSuccessfully() {cd 
+            mockGetProductByCode("P110", "Product 1", new BigDecimal("25.50"));
+            var payload =
+                    """
                             {
                                        "customer": {
                                          "name": "Sreevani",
@@ -44,59 +44,59 @@ class OrderControllerTests extends AbstractIT {
                                        ]
                                      }
                         """;
-                given().contentType(ContentType.JSON)
-                        //.header("Authorization", "Bearer " + getToken())
-                        .body(payload)
-                        .when()
-                        .post("/api/orders")
-                        .then()
-                        .statusCode(HttpStatus.CREATED.value())
-                        .body("orderNumber", notNullValue());
-            }
-
-            @Test
-            void shouldReturnBadRequestWhenMandatoryDataIsMissing() {
-                var payload = TestDataFactory.createOrderRequestWithInvalidCustomer();
-                given().contentType(ContentType.JSON)
-                        //.header("Authorization", "Bearer " + getToken())
-                        .body(payload)
-                        .when()
-                        .post("/api/orders")
-                        .then()
-                        .statusCode(HttpStatus.BAD_REQUEST.value());
-            }
+            given().contentType(ContentType.JSON)
+                    // .header("Authorization", "Bearer " + getToken())
+                    .body(payload)
+                    .when()
+                    .post("/api/orders")
+                    .then()
+                    .statusCode(HttpStatus.CREATED.value())
+                    .body("orderNumber", notNullValue());
         }
 
-        @Nested
-        class GetOrdersTests {
-            @Test
-            void shouldGetOrdersSuccessfully() {
-                List<OrderSummary> orderSummaries = given().when()
-                        //.header("Authorization", "Bearer " + getToken())
-                        .get("/api/orders")
-                        .then()
-                        .statusCode(200)
-                        .extract()
-                        .body()
-                        .as(new TypeRef<>() {});
-
-                assertThat(orderSummaries).hasSize(2);
-            }
+        @Test
+        void shouldReturnBadRequestWhenMandatoryDataIsMissing() {
+            var payload = TestDataFactory.createOrderRequestWithInvalidCustomer();
+            given().contentType(ContentType.JSON)
+                    // .header("Authorization", "Bearer " + getToken())
+                    .body(payload)
+                    .when()
+                    .post("/api/orders")
+                    .then()
+                    .statusCode(HttpStatus.BAD_REQUEST.value());
         }
+    }
 
-        @Nested
-        class GetOrderByOrderNumberTests {
-            String orderNumber = "order-123";
+    @Nested
+    class GetOrdersTests {
+        @Test
+        void shouldGetOrdersSuccessfully() {
+            List<OrderSummary> orderSummaries = given().when()
+                    // .header("Authorization", "Bearer " + getToken())
+                    .get("/api/orders")
+                    .then()
+                    .statusCode(200)
+                    .extract()
+                    .body()
+                    .as(new TypeRef<>() {});
 
-            @Test
-            void shouldGetOrderSuccessfully() {
-                given().when()
-                        //.header("Authorization", "Bearer " + getToken())
-                        .get("/api/orders/{orderNumber}", orderNumber)
-                        .then()
-                        .statusCode(200)
-                        .body("orderNumber", is(orderNumber))
-                        .body("items.size()", is(2));
-            }*/
+            assertThat(orderSummaries).hasSize(2);
+        }
+    }
+
+    @Nested
+    class GetOrderByOrderNumberTests {
+        String orderNumber = "order-123";
+
+        @Test
+        void shouldGetOrderSuccessfully() {
+            given().when()
+                    // .header("Authorization", "Bearer " + getToken())
+                    .get("/api/orders/{orderNumber}", orderNumber)
+                    .then()
+                    .statusCode(200)
+                    .body("orderNumber", is(orderNumber))
+                    .body("items.size()", is(2));
+        }*/
     }
 }
