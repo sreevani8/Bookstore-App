@@ -40,7 +40,7 @@ public class NotificationService {
                 """
                         .formatted(event.customer().name(), event.orderNumber());
         log.info("\n{}", message);
-         sendEmail(event.customer().email(), "Order Created Notification", message);
+        sendEmail(event.customer().email(), "Order Created Notification", message);
     }
 
     public void sendOrderDeliveredNotification(OrderDeliveredEvent event) {
@@ -58,7 +58,7 @@ public class NotificationService {
                 """
                         .formatted(event.customer().name(), event.orderNumber());
         log.info("\n{}", message);
-         sendEmail(event.customer().email(), "Order Delivered Notification", message);
+        sendEmail(event.customer().email(), "Order Delivered Notification", message);
     }
 
     public void sendOrderCancelledNotification(OrderCancelledEvent event) {
@@ -77,7 +77,7 @@ public class NotificationService {
                 """
                         .formatted(event.customer().name(), event.orderNumber(), event.reason());
         log.info("\n{}", message);
-         sendEmail(event.customer().email(), "Order Cancelled Notification", message);
+        sendEmail(event.customer().email(), "Order Cancelled Notification", message);
     }
 
     public void sendOrderErrorEventNotification(OrderErrorEvent event) {
@@ -94,9 +94,9 @@ public class NotificationService {
                 BookStore Team
                 ===================================================
                 """
-                .formatted(event.orderNumber(), event.reason());
+                        .formatted(event.orderNumber(), event.reason());
         log.info("\n{}", message);
-         sendEmail(properties.supportEmail(), "Order Processing Failure Notification", message);
+        sendEmail(properties.supportEmail(), "Order Processing Failure Notification", message);
     }
 
     private void sendEmail(String recipient, String subject, String content) {
