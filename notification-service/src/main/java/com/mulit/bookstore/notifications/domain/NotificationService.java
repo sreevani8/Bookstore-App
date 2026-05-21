@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class NotificationService {
-    private static final Logger log = LoggerFactory.getLogger(NotificationService.class);
+    public static final Logger log = LoggerFactory.getLogger(NotificationService.class);
 
     private final JavaMailSender emailSender;
     private final ApplicationProperties properties;
