@@ -1,5 +1,4 @@
 name: Notification Service
-
 on:
   push:
     paths:
