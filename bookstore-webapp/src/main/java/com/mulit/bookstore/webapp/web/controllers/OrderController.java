@@ -35,6 +35,20 @@ class OrderController {
 
         return orderServiceClient.createOrder(orderRequest);
     }*/
+    @PostMapping("/api/orders")
+    @ResponseBody
+    public ResponseEntity<?> createOrder(@RequestBody CreateOrderRequest orderRequest) {
+        try {
+            System.out.println("Order Request = " + orderRequest);
+
+            OrderConfirmationDTO response = orderServiceClient.createOrder(orderRequest);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace(); // IMPORTANT
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
+        }
+    }
 
     @GetMapping("/orders/{orderNumber}")
     String showOrderDetails(@PathVariable String orderNumber, Model model) {
@@ -70,20 +84,5 @@ class OrderController {
     @ResponseBody
     List<OrderSummary> getOrders() {
         return orderServiceClient.getOrders();
-    }
-
-    @PostMapping("/api/orders")
-    @ResponseBody
-    public ResponseEntity<?> createOrder(@RequestBody CreateOrderRequest orderRequest) {
-        try {
-            System.out.println("Order Request = " + orderRequest);
-
-            OrderConfirmationDTO response = orderServiceClient.createOrder(orderRequest);
-
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            e.printStackTrace(); // IMPORTANT
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.toString());
-        }
     }
 }
