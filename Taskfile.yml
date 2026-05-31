@@ -25,6 +25,7 @@ tasks:
       - mvn -pl order-service spring-boot:build-image -DskipTests
       - mvn -pl notification-service spring-boot:build-image -DskipTests
       - mvn -pl api-gateway spring-boot:build-image -DskipTests
+      - mvn -pl bookstore-webapp spring-boot:build-image -DskipTests
 
   start:
     deps: [build]
