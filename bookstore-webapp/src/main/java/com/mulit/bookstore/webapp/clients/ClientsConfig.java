@@ -17,7 +17,7 @@ class ClientsConfig {
         this.properties = properties;
     }
 
-/*@Bean
+    /*@Bean
     RestClientCustomizer restClientCustomizer() {
         var requestFactory = ClientHttpRequestFactoryBuilder.simple()
                 .withCustomizer(c -> {
@@ -28,7 +28,6 @@ class ClientsConfig {
         return restClientBuilder ->
                 restClientBuilder.baseUrl(properties.apiGatewayUrl()).requestFactory(requestFactory);
     }*/
-
 
     @Bean
     CatalogServiceClient catalogServiceClient() {

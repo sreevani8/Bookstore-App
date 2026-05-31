@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 class ProductController {
-    //private static final Logger log = LoggerFactory.getLogger(ProductController.class);
+    // private static final Logger log = LoggerFactory.getLogger(ProductController.class);
     private final CatalogServiceClient catalogService;
 
     ProductController(CatalogServiceClient catalogService) {

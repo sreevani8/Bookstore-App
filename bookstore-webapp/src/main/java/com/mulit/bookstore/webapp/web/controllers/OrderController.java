@@ -5,9 +5,7 @@ import com.mulit.bookstore.webapp.clients.orders.OrderConfirmationDTO;
 import com.mulit.bookstore.webapp.clients.orders.OrderDTO;
 import com.mulit.bookstore.webapp.clients.orders.OrderServiceClient;
 import com.mulit.bookstore.webapp.clients.orders.OrderSummary;
-
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +19,8 @@ class OrderController {
 
     private final OrderServiceClient orderServiceClient;
 
-
     OrderController(OrderServiceClient orderServiceClient) {
         this.orderServiceClient = orderServiceClient;
-
     }
 
     @GetMapping("/cart")
@@ -60,5 +56,4 @@ class OrderController {
     List<OrderSummary> getOrders() {
         return orderServiceClient.getOrders();
     }
-
 }
