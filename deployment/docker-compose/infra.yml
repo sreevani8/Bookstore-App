@@ -1,5 +1,9 @@
 name: 'Bookstore-App'
 services:
+  order-service:
+    environment:
+      BPL_JVM_THREAD_COUNT: 50
+      BPL_JVM_HEAD_ROOM: 10
 
 
   catalog-db:
