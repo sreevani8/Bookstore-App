@@ -9,36 +9,26 @@ import org.springframework.stereotype.Service;
 @Service
 public class SecurityService {
 
-
     public String getLoginUserName() {
 
-        Authentication authentication =
-                SecurityContextHolder.getContext()
-                        .getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-
-        if(authentication == null){
+        if (authentication == null) {
             throw new RuntimeException("No authentication found");
         }
 
-
-        if(authentication instanceof JwtAuthenticationToken jwtToken){
+        if (authentication instanceof JwtAuthenticationToken jwtToken) {
 
             Jwt jwt = jwtToken.getToken();
 
-            String username =
-                    jwt.getClaimAsString("preferred_username");
+            String username = jwt.getClaimAsString("preferred_username");
 
-
-            if(username == null){
-                username =
-                        jwt.getClaimAsString("sub");
+            if (username == null) {
+                username = jwt.getClaimAsString("sub");
             }
-
 
             return username;
         }
-
 
         return authentication.getName();
     }

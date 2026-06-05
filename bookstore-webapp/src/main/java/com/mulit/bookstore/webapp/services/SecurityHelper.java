@@ -1,6 +1,5 @@
 package com.mulit.bookstore.webapp.services;
 
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -27,11 +26,10 @@ public class SecurityHelper {
 
         return client.getAccessToken().getTokenValue();
     }
+
     public String getUsername() {
 
-        Authentication authentication =
-                SecurityContextHolder.getContext()
-                        .getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication.getPrincipal() instanceof OAuth2User oauthUser) {
 
@@ -41,5 +39,3 @@ public class SecurityHelper {
         return authentication.getName();
     }
 }
-
-

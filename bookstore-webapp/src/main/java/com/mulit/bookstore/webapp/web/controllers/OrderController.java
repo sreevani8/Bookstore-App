@@ -5,11 +5,10 @@ import com.mulit.bookstore.webapp.clients.orders.OrderConfirmationDTO;
 import com.mulit.bookstore.webapp.clients.orders.OrderDTO;
 import com.mulit.bookstore.webapp.clients.orders.OrderServiceClient;
 import com.mulit.bookstore.webapp.clients.orders.OrderSummary;
-import java.util.List;
-import java.util.Map;
-
 import com.mulit.bookstore.webapp.services.SecurityHelper;
 import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,35 +35,28 @@ class OrderController {
 
     @PostMapping("/api/orders")
     @ResponseBody
+    OrderConfirmationDTO createOrder(@Valid @RequestBody CreateOrderRequest orderRequest) {
+
+        String accessToken = securityHelper.getAccessToken();
+
+        Map<String, ?> headers = Map.of("Authorization", "Bearer " + accessToken);
+
+        return orderServiceClient.createOrder(headers, orderRequest);
+    }
+
+    /* @PostMapping("/api/orders")
+    @ResponseBody
     OrderConfirmationDTO createOrder(
             @Valid @RequestBody CreateOrderRequest orderRequest) {
 
         String accessToken = securityHelper.getAccessToken();
 
-        Map<String, ?> headers = Map.of(
-                "Authorization",
-                "Bearer " + accessToken
-        );
+        Map<String, ?> headers =
+                Map.of("Authorization", "Bearer " + accessToken);
 
-        return orderServiceClient.createOrder(
-                headers,
-                orderRequest
-        );
+        return orderServiceClient.createOrder(headers, orderRequest);
     }
-
-   /* @PostMapping("/api/orders")
-@ResponseBody
-OrderConfirmationDTO createOrder(
-        @Valid @RequestBody CreateOrderRequest orderRequest) {
-
-    String accessToken = securityHelper.getAccessToken();
-
-    Map<String, ?> headers =
-            Map.of("Authorization", "Bearer " + accessToken);
-
-    return orderServiceClient.createOrder(headers, orderRequest);
-}
-    }*/
+        }*/
 
     @GetMapping("/orders/{orderNumber}")
     String showOrderDetails(@PathVariable String orderNumber, Model model) {
@@ -72,24 +64,23 @@ OrderConfirmationDTO createOrder(
         return "order_details";
     }
 
-     /*@GetMapping("/api/orders/{orderNumber}")
+    /*@GetMapping("/api/orders/{orderNumber}")
     @ResponseBody
     OrderDTO getOrder(@PathVariable String orderNumber) {
         String accessToken = securityHelper.getAccessToken();
         Map<String, ?> headers = Map.of("Authorization", "Bearer" + accessToken);
         return orderServiceClient.getOrder(headers, orderNumber);
     }*/
-     @GetMapping("/api/orders/{orderNumber}")
-     @ResponseBody
-     OrderDTO getOrder(@PathVariable String orderNumber) {
+    @GetMapping("/api/orders/{orderNumber}")
+    @ResponseBody
+    OrderDTO getOrder(@PathVariable String orderNumber) {
 
-         String accessToken = securityHelper.getAccessToken();
+        String accessToken = securityHelper.getAccessToken();
 
-         Map<String, ?> headers =
-                 Map.of("Authorization", "Bearer " + accessToken);
+        Map<String, ?> headers = Map.of("Authorization", "Bearer " + accessToken);
 
-         return orderServiceClient.getOrder(headers, orderNumber);
-     }
+        return orderServiceClient.getOrder(headers, orderNumber);
+    }
 
     @GetMapping("/orders")
     String showOrders() {
@@ -102,10 +93,8 @@ OrderConfirmationDTO createOrder(
 
         String accessToken = securityHelper.getAccessToken();
 
-        Map<String, ?> headers =
-                Map.of("Authorization", "Bearer " + accessToken);
+        Map<String, ?> headers = Map.of("Authorization", "Bearer " + accessToken);
 
         return orderServiceClient.getOrders(headers);
     }
-
 }
