@@ -1,8 +1,13 @@
-/*
 package com.mulit.bookstore.webapp.services;
 
 
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
+import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SecurityHelper {
@@ -22,5 +27,19 @@ public class SecurityHelper {
 
         return client.getAccessToken().getTokenValue();
     }
+    public String getUsername() {
+
+        Authentication authentication =
+                SecurityContextHolder.getContext()
+                        .getAuthentication();
+
+        if (authentication.getPrincipal() instanceof OAuth2User oauthUser) {
+
+            return oauthUser.getAttribute("preferred_username");
+        }
+
+        return authentication.getName();
+    }
 }
-*/
+
+
