@@ -1,9 +1,19 @@
 package com.mulit.bookstore.orders.web.controllers;
 
+import org.junit.jupiter.api.Nested;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrderServiceApplicationTests {}
+class OrderControllerTests {
+
+    @Nested
+    class CreateOrderTests {
+
+        void Test() {
+            System.out.println("Test passed");
+        }
+    }
+}
 
 /*
 import static io.restassured.RestAssured.given;
