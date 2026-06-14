@@ -1,14 +1,32 @@
 package com.mulit.bookstore.orders;
 
+import dasniko.testcontainers.keycloak.KeycloakContainer;
+import java.time.Duration;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Bean;
+import org.springframework.test.context.DynamicPropertyRegistrar;
 import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.rabbitmq.RabbitMQContainer;
 import org.testcontainers.utility.DockerImageName;
+import org.wiremock.integrations.testcontainers.WireMockContainer;
 
 @TestConfiguration(proxyBeanMethods = false)
-class TestcontainersConfiguration {
+public class TestcontainersConfiguration {
+    static String KEYCLOAK_IMAGE = "quay.io/keycloak/keycloak:26.3.0";
+    static String realmImportFile = "/bookstore-realm.json";
+    static String realmName = "bookstore";
+
+    @Bean
+    WireMockContainer wiremockServer() {
+
+        WireMockContainer wiremock = new WireMockContainer("wiremock/wiremock:3.9.1");
+
+        wiremock.start();
+
+        return wiremock;
+    }
 
     @Bean
     @ServiceConnection
@@ -20,5 +38,27 @@ class TestcontainersConfiguration {
     @ServiceConnection
     RabbitMQContainer rabbitContainer() {
         return new RabbitMQContainer(DockerImageName.parse("rabbitmq:4.0.4-alpine"));
+    }
+
+    @Bean
+    KeycloakContainer keycloak() {
+        return new KeycloakContainer(KEYCLOAK_IMAGE)
+                .withEnv("KC_HEALTH_ENABLED", "true")
+                .withEnv("KC_BOOTSTRAP_ADMIN_USERNAME", "admin")
+                .withEnv("KC_BOOTSTRAP_ADMIN_PASSWORD", "admin")
+                .withRealmImportFile(realmImportFile)
+                .waitingFor(Wait.forHttp("/health/ready").forStatusCode(200))
+                .withEnv("KC_HEALTH_ENABLED", "true")
+                .withStartupTimeout(Duration.ofMinutes(5));
+    }
+
+    @Bean
+    DynamicPropertyRegistrar dynamicPropertyRegistrar(WireMockContainer wiremockServer, KeycloakContainer keycloak) {
+        return (registry) -> {
+            registry.add("orders.catalog-service-url", wiremockServer::getBaseUrl);
+            registry.add(
+                    "spring.security.oauth2.resourceserver.jwt.issuer-uri",
+                    () -> keycloak.getAuthServerUrl() + "/realms/" + realmName);
+        };
     }
 }

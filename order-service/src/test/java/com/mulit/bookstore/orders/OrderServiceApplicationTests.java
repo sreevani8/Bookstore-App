@@ -1,5 +1,6 @@
 package com.mulit.bookstore.orders;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
@@ -7,6 +8,6 @@ import org.springframework.context.annotation.Import;
 @SpringBootTest
 class OrderServiceApplicationTests extends AbstractIT {
 
-    /*@Test
-    void contextLoads() {}*/
+    @Test
+    void contextLoads() {}
 }
